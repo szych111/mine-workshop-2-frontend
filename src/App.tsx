@@ -1,9 +1,14 @@
+import { Form } from './Form'
+import {WeatherData} from './WeatherData'
+
 function App() {
   return (
-    <div>
-      Temperature: <span className="temperature">10</span>
-    </div>
+    <main>
+      <Form />
+      <WeatherData />
+    </main>
   );
+
 }
 
 export default App;
