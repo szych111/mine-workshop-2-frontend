@@ -3,9 +3,8 @@ import { FC, useState } from "react";
 import './index.css';
 
 export const Form: FC = () => {
-    const [films, setFilms] = useState([])
-    const [lon, setLon] = useState(52.2297)
-    const [lat, setLat] = useState(21.0122)
+    const [LON, setLon] = useState(52.2297)
+    const [LAT, setLat] = useState(21.0122)
 
     const LON_HANDLER = (e: any) => {
         setLon(e.target.value)
@@ -15,24 +14,22 @@ export const Form: FC = () => {
         setLat(e.target.value)
     }
 
-    const OPEN_WEATHER_KEY = "445e30376f978de083490ba962111ce5"
+    const OPEN_WEATHER_KEY = "16ce5520bd032264b1ac7375550e162d"
 
     const FETCH_OPEN_WEATHER = () => {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}`)
+        fetch(`api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${OPEN_WEATHER_KEY}`)
         .then(response => {return response.json()})
-        .then(newData => console.log(newData.main))
-    //     .then(data => {
+        .then(data => console.log(data.main))
+    //     .then(weatherData => {
     //         // @ts-ignore
-    //         const transformedFilms = data.results.map(filmsData => {
+    //         const dataToDisplay = weatherData.main.map(data => {
     //             return {
-    //                 id: filmsData.episode_id,
-    //                 title: filmsData.title,
-    //                 openingText: filmsData.opening_crawl,
-    //                 releaseDate: filmsData.release_date
+    //                 temp: data.temp,
+    //                 feelsLike: data.feels_like,
+    //                 pressure: data.pressure,
+    //                 humidity: data.humidity
     //             }
     //         })
-    //         setFilms(data.results)})
-    //         console.log(films)
     }
 
     return (
