@@ -36,7 +36,7 @@ export const Form: FC = () => {
             pressure: data.main.pressure,
             windSpeed: data.wind.speed,
             place: data.name,
-            country: data.sys.country,
+            country: `${data.sys.country}/`,
             provider: 'OpenWeather'
         })
         console.log(WEATHER_DATA)
@@ -44,12 +44,19 @@ export const Form: FC = () => {
 
 
     async function fetchVisualCrossing() {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${LAT},${LON}?key=${process.env.REACT_APP_VISUAL_CROSSING_KEY}`)
-        // const data = await response.json()
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${LAT},${LON}/today?key=${process.env.REACT_APP_VISUAL_CROSSING_KEY}`)
+        const data = await response.json()
         console.log(response)
-    }
 
-    // elements=temp,feelslike,pressure,humidity
+        setWEATHER_DATA({
+            temperature: data.currentConditions.temp,
+            feelsLike: data.currentConditions.feelslike,
+            pressure: data.currentConditions.pressure,
+            windSpeed: data.currentConditions.windspeed,
+            place: data.timezone,
+            provider: 'VisualCrossing'
+        })
+    }
 
     return (
         <main>
@@ -75,37 +82,38 @@ export const Form: FC = () => {
                 <div className='line'>
                     <p className='description'>Place</p>
                     <p className='unit'>
-                        <span className='temp-number'>{WEATHER_DATA.place}, {WEATHER_DATA.country}</span>
+                        <span className='temp-number'>{WEATHER_DATA.country}{WEATHER_DATA.place}</span>
                     </p>
                 </div>
                 <div className='line'>
                     <p className='description'>Temperature</p>
                     <p className='unit'>
                         <span className='temp-number'>{WEATHER_DATA.temperature}</span>
-                        <span className='temp-degrees'>o</span>
+                        <span className='temp-degrees'><sup>o</sup></span>
                         <span className='temp-scale'>F</span>
                     </p>
                 </div>
                 <div className='line'>
-                    <p className='description'>Wind speed</p>
+                    <p className='description'>Feels Like</p>
                     <p className='unit'>
                         <span className='wind-number'>{WEATHER_DATA.feelsLike}</span>
-                        <span className='wind-unit'></span>
-                        <span className='wind-hour'>/ hour</span>
+                        <span className='temp-degrees'><sup>o</sup></span>
+                        <span className='temp-scale'>F</span>
                     </p>
                 </div>
                 <div className='line'>
                     <p className='description'>Pressure</p>
                     <p className='unit'>
                         <span className='pressure-number'>{WEATHER_DATA.pressure}</span>
-                        <span className='pressure-unit'></span>
+                        <span className='pressure-unit'> hPa</span>
                     </p>
                 </div>
                 <div className='line'>
-                    <p className='description'>Humidity</p>
+                    <p className='description'>Wind Speed</p>
                     <p className='unit'>
                         <span className='pressure-number'>{WEATHER_DATA.windSpeed}</span>
-                        <span className='pressure-unit'></span>
+                        <span className='wind-unit'> meters</span>
+                        <span className='wind-hour'>/sec</span>
                     </p>
                 </div>
             </div>
