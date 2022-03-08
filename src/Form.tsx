@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
-import { WeatherData } from "./WeatherData";
 import './index.css';
+
 
 export const Form: FC = () => {
     const [LAT, setLat] = useState(52.2297)
@@ -14,8 +14,15 @@ export const Form: FC = () => {
         feelsLike?: number,
         pressure?: number,
         windSpeed?: number,
-    }>({})
-
+    }>({
+        provider: '',
+        place: '',
+        country: '',
+        temperature: 0,
+        feelsLike: 0,
+        pressure: 0,
+        windSpeed: 0,
+    })
 
     const LON_HANDLER = (e: any) => {
         setLon(e.target.value)
@@ -31,8 +38,8 @@ export const Form: FC = () => {
         console.log(data)
 
         setWEATHER_DATA({
-            temperature: data.main.temp,
-            feelsLike: data.main.feels_like,
+            temperature: Math.round(data.main.temp),
+            feelsLike: Math.round(data.main.feels_like),
             pressure: data.main.pressure,
             windSpeed: data.wind.speed,
             place: data.name,
@@ -41,7 +48,6 @@ export const Form: FC = () => {
         })
         console.log(WEATHER_DATA)
     }
-
 
     async function fetchVisualCrossing() {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${LAT},${LON}/today?&unitGroup=metric&key=${process.env.REACT_APP_VISUAL_CROSSING_KEY}`)
@@ -59,7 +65,7 @@ export const Form: FC = () => {
     }
 
     return (
-        <main>
+        <div className="main">
             <div className="form-container">
                 <form>
                     <input type="number" min="-90.0000" max="90.0000" step="0.0001" placeholder="latitude" onChange={LAT_HANDLER} />
@@ -117,6 +123,6 @@ export const Form: FC = () => {
                     </p>
                 </div>
             </div>
-        </main>
+        </div>
     )
 }
