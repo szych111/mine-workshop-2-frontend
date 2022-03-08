@@ -55,8 +55,8 @@ export const Form: FC = () => {
         console.log(response)
 
         setWEATHER_DATA({
-            temperature: data.currentConditions.temp,
-            feelsLike: data.currentConditions.feelslike,
+            temperature: Math.round(data.currentConditions.temp),
+            feelsLike: Math.round(data.currentConditions.feelslike),
             pressure: data.currentConditions.pressure,
             windSpeed: data.currentConditions.windspeed,
             place: data.timezone,
