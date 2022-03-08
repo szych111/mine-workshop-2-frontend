@@ -47,7 +47,7 @@ button:first-of-type {
 
 button {
   width: min(150px,25vw);
-  margin: 0 5vw;
+  margin: 0 3vw;
   aspect-ratio: 1;
   background-color: rgba(0, 128, 128, 0.8);
   border-radius: 5px;
