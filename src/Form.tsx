@@ -41,7 +41,7 @@ export const Form: FC = () => {
             temperature: Math.round(data.main.temp),
             feelsLike: Math.round(data.main.feels_like),
             pressure: data.main.pressure,
-            windSpeed: data.wind.speed,
+            windSpeed: data.wind.speed * 3.6,
             place: data.name,
             country: `${data.sys.country}/`,
             provider: 'OpenWeather'
@@ -118,8 +118,8 @@ export const Form: FC = () => {
                     <p className='description'>Wind Speed</p>
                     <p className='data'>
                         <span className='wind-data'>{WEATHER_DATA.windSpeed}</span>
-                        <span className='wind-unit'> meters</span>
-                        <span className='wind-hour'>/sec</span>
+                        <span className='wind-unit'> km</span>
+                        <span className='wind-hour'>/hr</span>
                     </p>
                 </div>
             </div>

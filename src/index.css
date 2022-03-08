@@ -49,8 +49,14 @@ button {
   width: min(200px,35vw);
   height: 5em;
   padding: 0 2em;
-  background-color: teal;
+  background-color: rgba(0, 128, 128, 0.8);
   border-radius: 5px;
   border: none;
   font-size: 1em;
+  cursor: pointer;
+  transition: background-color 500ms ease-out;
+}
+
+button:hover {
+  background-color: rgba(0, 128, 128, 1);
 }
